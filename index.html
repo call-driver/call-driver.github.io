@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Call Driver</title>
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<h1>Call Driver</h1>
+
+<main>
+	<form id="callDriver">
+		<div class="form-column">
+
+			<div style="display: flex; gap: 10px;">
+				<label for="ivrVerified">Caller verified through IVR?</label>
+				<label for="ivrYes">Yes <input type="radio" id="ivrYes" name="ivrResult" value="Yes"></label>
+				<label for="ivrNo">No <input type="radio" id="ivrNo" name="ivrResult" value="No"></label>
+			</div>
+
+			<label for="languageLine">Language Line Call? <input type="checkbox" id="languageLine" name="languageLine"
+															  onclick="toggleLanguageLineSection()"></label>
+
+			<div class="language-line-section">
+				<label for="languageLineID">Language Line Rep's ID#:</label>
+				<input type="text" id="languageLineID" name="languageLineID">
+			</div>
+
+			<label for="name">Caller's Name:</label>
+			<input type="text" id="name" name="name">
+
+			<label for="primaryName">Primary's Name:</label>
+			<input type="text" id="primaryName" name="primaryName">
+
+			<label for="hhid">HHID:</label>
+			<input type="text" id="hhid" name="hhid">
+
+			<label for="callbackNum">Callback Number:</label>
+			<input type="text" id="callbackNum" name="callbackNum">
+
+			<label for="reason">Reason for the call:</label>
+			<select id="reason" name="reason">
+				<option value="placeholder">Select Option</option>
+				<option value="Creating/Claiming Account (Access Code)">Creating/Claiming Account (Access Code)
+				</option>
+				<option value="Logging In (Password Reset, DUO)">Logging In (Password Reset, DUO)</option>
+				<option value="Application Assistance (Applying for Coverage/ Filling out/ Submitting application)">Application
+					Assistance (Applying for Coverage/ Filling out/ Submitting application)
+				</option>
+				<option value="Eligibility Questions (APTC/CSR/HH Size/Income">Eligibility Questions (APTC/CSR/HH Size/Income)
+				</option>
+				<option value="QLE Questions">QLE Questions</option>
+				<option value="Plan Shopping">Plan Shopping</option>
+				<option value="Enrollment Assistance (Getting Enrolled, Reinstatement, Termination, Enrollment Status)">Enrollment
+					Assistance (Getting Enrolled, Reinstatement, Termination, Enrollment Status)
+				</option>
+				<option value="Billing Questions">Billing Questions</option>
+				<option value="DMI Questions/ Help">DMI Questions/ Help</option>
+				<option value="Appeals">Appeals</option>
+				<option value="Medicaid">Medicaid</option>
+				<option value="Ticket Status (Non-DMI)">Ticket Status (Non-DMI)</option>
+				<option value="Technical Help (System Error/ Website Navigation)">Technical Help (System Error/ Website
+					Navigation)
+				</option>
+				<option value="Feedback (Kudos, Complaints, Suggestions)">Feedback (Kudos, Complaints, Suggestions)
+				</option>
+				<option value="Broker/Assister Account Maintenance">Broker/Assister Account Maintenance</option>
+				<option value="Language Line">Language Line</option>
+				<option value="Test Call">Test Call</option>
+				<option value="Misc/Other">Misc/Other</option>
+			</select>
+
+			<label for="details">Call Notes:</label>
+			<textarea id="details" name="details"></textarea>
+
+			<div>
+				<div style="display: flex; gap: 10px;">
+					<label>Was the caller's issue/reason resolved?</label>
+					<label for="resolvedYes">Yes <input type="radio" id="resolvedYes" name="issueResolved" value="Yes"
+														onclick="toggleResolutionDetails(false)"></label>
+					<label for="resolvedNo">No <input type="radio" id="resolvedNo" name="issueResolved" value="No"
+													   onclick="toggleResolutionDetails(true)"></label>
+				</div>
+			</div>
+
+			<div id="resolutionDetailsSection" style="display: none;">
+				<label for="resolutionDetails">What is needed for resolution:</label>
+				<textarea id="resolutionDetails" name="resolutionDetails"></textarea>
+			</div>
+
+			<label for="ticketCreated">Ticket created? <input type="checkbox" id="ticketCreated" name="ticketCreated"
+															 onclick="toggleTicketSection()"></label>
+
+			<div class="ticket-section">
+				<label for="ticketNumber">Ticket number:</label>
+				<input type="text" id="ticketNumber" name="ticketNumber">
+			</div>
+
+			<label for="nextSteps">Next Steps:</label>
+			<textarea id="nextSteps" name="nextSteps"></textarea>
+
+			<div style="display: flex; gap: 10px;">
+				<label>Was the survey offered?</label>
+				<label for="surveyOfferedYes">Yes <input type="radio" id="surveyOfferedYes" name="surveyOffered" value="Yes"
+														 onclick="toggleSurveyReason(false)"></label>
+				<label for="surveyOfferedNo">No <input type="radio" id="surveyOfferedNo" name="surveyOffered" value="No"
+														onclick="toggleSurveyReason(true)"></label>
+			</div>
+
+			<div id="surveyReasonSection" style="display: none;">
+				<label for="surveyReason">Why was the survey not offered?</label>
+				<input type="text" id="surveyReason" name="surveyReason">
+			</div>
+
+			<div style="display: flex; justify-content: space-between;">
+				<button id="generate-output-button" type="button" onclick="generateOutput()">Generate Call Log</button>
+				<button id="clear-button" type="button" onclick="clearForm()">Clear Form</button>
+			</div>
+
+		</div>
+	</form>
+
+	<div id="output-panel">
+		<h3>Generated Call Log</h3>
+		<div id="output"></div>
+		<button id="copy-output-button" onclick="copyOutput()">Copy Call Log</button>
+		<h6>After copying, paste the Call Log into "Add Call Note" with CTRL + V or Right Click</h6>
+	</div>
+</main>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
+
